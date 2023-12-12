@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import styles from './IdeHeader.module.css';
+import React from 'react';
+import Button from '../atom-components/Button';
 
-const IdeHeader = () => {
-  const [urlCopideView, setUrlCopideView] = useState(false);
-
+const IdeHeader: React.FC = () => {
+  const [urlCopideView, setUrlCopideView] = React.useState<boolean>(true);
+  const [isDarkMode, setIsDarkMode] = React.useState<boolean>(false);
   const copyUrlToClipboard = () => {
     const currentUrl = window.location.href;
     navigator.clipboard
       .writeText(currentUrl)
       .then(() => {
         setUrlCopideView(true);
+        console.log(currentUrl);
       })
       .catch((error) => {
         console.error('URL 복사 중 오류 발생:', error);
@@ -17,32 +18,45 @@ const IdeHeader = () => {
       });
   };
 
-  useEffect(() => {
-    if (urlCopideView) {
-      setTimeout(() => {
-        setUrlCopideView(false);
-      }, 2000);
-    }
-  }, [urlCopideView]);
+  // React.useEffect(() => {
+  //   if (urlCopideView) {
+  //     setTimeout(() => {
+  //       setUrlCopideView(false);
+  //     }, 2000);
+  //   }
+  // }, [urlCopideView]);
+
   return (
-    <div
-      className={`${styles.IdeTopBarContainer} flex items-center fixed w-screen z-10 border-b bg-white`}
-    >
+    <div className={`flex items-center fixed w-screen z-10 border-b bg-white`}>
       <a href='https://main.hong-sam.online/question'>
-        <p className={`${styles.IdeTopBarHeader} text-2xl pl-5 p-2`}>Hongsam IDE</p>
+        <p className={`text-2xl pl-5 p-2 text-main-color`}>Hongsam IDE</p>
       </a>
       <div className='ml-5'></div>
       <div className='grow'></div>
       <div className='flex items-center gap-5 pr-5'>
-        <div className='relative'>
+        <div className='flex flex-col items-center'>
           <button onClick={copyUrlToClipboard}>Share</button>
           {urlCopideView ? (
-            <div className={`${styles.CopySuccess} rounded-md absolute text-sm`}>url 복사 완료</div>
+            <p
+              className={`rounded-md fixed top-10 text-sm bg-white p-1 w-24 text-center border border-main-color`}
+            >
+              url 복사 완료
+            </p>
           ) : null}
         </div>
-        <button>Save</button>
-        <button>Pull</button>
-        <button>Run</button>
+        <Button label={true ? '🌙' : '☀️'} />
+        <Button label='Run' />
+        <Button
+          label='Save'
+          tooltipElement={
+            <p
+              className={`rounded-md fixed top-10 text-sm bg-white p-1 w-24 text-center border border-main-color`}
+            >
+              url 복사 완료
+            </p>
+          }
+          onClick={copyUrlToClipboard}
+        />
       </div>
     </div>
   );
