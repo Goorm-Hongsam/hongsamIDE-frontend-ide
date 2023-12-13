@@ -9,3 +9,19 @@ export const isDarkModeState = atom({
   key: 'isDarkModeState',
   default: false,
 });
+export const senderState = atom({
+  key: 'senderState',
+  default: '',
+});
+export const uuidState = atom({
+  key: 'uuidState',
+  default: 'aa11dd',
+});
+export const questionIdState = atom({
+  key: 'questionIdState',
+  default: '1',
+});
+export const roomIdState = atom({
+  key: 'roomIdState',
+  default: '',
+});
