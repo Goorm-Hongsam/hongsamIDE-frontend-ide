@@ -18,7 +18,8 @@
   font-family: 'NeoDunggeunmoPro-Regular';
 }
 
-body {
+body,
+div {
   transition:
     background-color 0.7s ease,
     color 0.7s ease; /* 배경색 및 글자색 전환 효과 */
