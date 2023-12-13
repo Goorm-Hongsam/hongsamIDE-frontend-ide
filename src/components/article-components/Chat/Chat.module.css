@@ -1,0 +1,103 @@
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.enter {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.text {
+  height: 65px;
+  display: flex;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.text textarea {
+  border: none;
+  resize: none;
+  outline: none;
+  width: 300px;
+  height: 30px;
+  display: flex;
+  padding: 3px 10px;
+}
+.text textarea::-webkit-scrollbar {
+  width: 0; /* 수평 스크롤바 너비를 0으로 설정 */
+  height: 0; /* 수직 스크롤바 높이를 0으로 설정 */
+}
+
+.text button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 12px;
+  color: white;
+  cursor: pointer;
+}
+.bgGreen {
+  background-color: var(--main-color);
+}
+
+.bgGreen:hover {
+  background-color: var(--mainDark-color);
+}
+
+.send {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 5px 0;
+}
+
+.sender,
+.receiver {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+.sendChat {
+  background-color: var(--main-color);
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 200px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: white;
+}
+
+.receive {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px 0;
+}
+
+.receiveChat {
+  background-color: #0079ff;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 200px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: white;
+}
+
+.time {
+  padding-top: 5px;
+  font-size: 10px;
+}
