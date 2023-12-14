@@ -30,6 +30,7 @@
   height: 30px;
   display: flex;
   padding: 3px 10px;
+  border-radius: 5px;
 }
 .text textarea::-webkit-scrollbar {
   width: 0; /* 수평 스크롤바 너비를 0으로 설정 */
