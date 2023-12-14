@@ -1,15 +1,15 @@
 import React from 'react';
 import CodeMirror, { EditorState } from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-import { EditorView } from '@uiw/react-codemirror';
 
+// import { javascript } from '@codemirror/lang-javascript';
+// import { python } from '@codemirror/lang-python';
+
+import { EditorView } from '@uiw/react-codemirror';
 import { githubDark, githubLight } from '@uiw/codemirror-theme-github';
 import { java } from '@codemirror/lang-java';
-import { python } from '@codemirror/lang-python';
 import Terminal from './Terminal';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { codeState, isDarkModeState } from '../../atoms/recoliAtoms';
-
 export interface ReactCodeMirrorRef {
   editor?: HTMLDivElement | null;
   state?: EditorState;
@@ -17,9 +17,9 @@ export interface ReactCodeMirrorRef {
 }
 
 const CodeEditor = () => {
+  // const pyLang = [python()];
+  // const jsLang = [javascript({ jsx: true })];
   const javaLang = [java()];
-  const pyLang = [python()];
-  const jsLang = [javascript({ jsx: true })];
   const [code, setCode] = useRecoilState(codeState);
   const isDarkMode = useRecoilValue(isDarkModeState);
 
