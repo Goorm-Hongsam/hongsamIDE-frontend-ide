@@ -128,7 +128,7 @@ const Chat: React.FC = () => {
 
   return (
     <div
-      className={`w-72 fixed bottom-0 right-0 z-50 mb-10 mr-2 border border-main-color flex flex-col gap-3 bg-zinc-700 rounded-md`}
+      className={`w-72 fixed bottom-0 right-0 z-50 mb-12 mr-2 border border-main-color flex flex-col gap-3 bg-zinc-700 rounded-md`}
     >
       <div className={`h-72 overflow-y-scroll p-3`} ref={scrollContainerRef}>
         {messages.map((message, index) => (

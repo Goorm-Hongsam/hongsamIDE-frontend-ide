@@ -24,3 +24,6 @@ div {
     background-color 0.7s ease,
     color 0.7s ease; /* 배경색 및 글자색 전환 효과 */
 }
+div::-webkit-scrollbar {
+  display: none; /* 스크롤바 숨김 */
+}

@@ -6,9 +6,9 @@ const Terminal = () => {
   const isDarkMode = useRecoilValue(isDarkModeState);
   return (
     <div
-      style={{ height: '20%' }}
+      style={{ height: '203px' }}
       className={cn(
-        'bottom-0 right-0 bg-white z-50 p-5 border-t border-main-color',
+        'bottom-0 right-0 mb-12 bg-white p-5 border-t border-main-color',
         isDarkMode ? 'bg-black text-white ' : 'bg-white',
       )}
     >
