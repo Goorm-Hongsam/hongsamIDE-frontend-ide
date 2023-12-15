@@ -1,18 +1,18 @@
 import React from 'react';
 import Button from '../atom-components/Button';
-import { codeState, isDarkModeState } from '../../atoms/recoliAtoms';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { isDarkModeState } from '../../atoms/recoliAtoms';
+import { useRecoilState } from 'recoil';
 import useCodeSubmit from '../../hooks/useCodeSubmit';
 import { copyUrlToClipboard } from '../../utils/copyUrl';
 import { cn } from '../../utils/cn';
 import SunIcon from '../atom-components/icon/SunIcon';
 import MoonIcon from '../atom-components/icon/MoonIcon';
+import ToolTip from '../atom-components/ToolTip';
 
 const IdeHeader: React.FC = () => {
   const [urlCopideView, setUrlCopideView] = React.useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useRecoilState<boolean>(isDarkModeState);
-  const { submitCode } = useCodeSubmit();
-  const code = useRecoilValue(codeState);
+  const { submitCode, saveCode } = useCodeSubmit();
 
   React.useEffect(() => {
     if (urlCopideView) {
@@ -45,27 +45,12 @@ const IdeHeader: React.FC = () => {
       <div className='ml-5'></div>
       <div className='grow'></div>
       <div className='flex items-center gap-5 pr-5'>
-        <div className='flex flex-col items-center '>
+        <div className='flex flex-col items-center'>
           <Button label='Share' onClick={() => copyUrlToClipboard(setUrlCopideView)} />
-          {urlCopideView ? (
-            <p
-              className={cn(
-                `rounded-md fixed top-10 text-sm bg-white p-1 w-24 text-center border border-main-color`,
-                isDarkMode ? 'bg-black text-white ' : 'bg-white',
-              )}
-            >
-              url 복사 완료
-            </p>
-          ) : null}
+          {urlCopideView && <ToolTip label='복사 완료' background={'ligth'} />}
         </div>
-
-        <Button
-          label='Run'
-          onClick={() => {
-            submitCode(code);
-          }}
-        />
-        <Button label='Save' />
+        <Button label='Run' onClick={submitCode} />
+        <Button label='Save' onClick={saveCode} />
       </div>
     </div>
   );
