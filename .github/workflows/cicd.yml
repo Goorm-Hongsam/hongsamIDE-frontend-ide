@@ -48,4 +48,6 @@ jobs:
         echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
         chmod 600 private_key.pem
         scp -r -i private_key.pem -o StrictHostKeyChecking=no dist ${{ secrets.EC2_HOST }}@${{ secrets.EC2_IP }}:/home/${{ secrets.EC2_HOST }}/hongsamIDE-frontend-ide
+        script: | # 실행할 스크립트
+            sudo systemctl restart nginx
         rm -f private_key.pem
