@@ -6,6 +6,7 @@ import styles from './Chat.module.css';
 import axios from 'axios';
 import { isDarkModeState, roomIdState, senderState, uuidState } from '../../../atoms/recoliAtoms';
 import { useRecoilValue } from 'recoil';
+import { cn } from '../../../utils/cn';
 
 interface MessageType {
   type: string;
@@ -128,7 +129,10 @@ const Chat: React.FC = () => {
 
   return (
     <div
-      className={`w-72 fixed bottom-0 right-0 z-50 mb-12 mr-2 border border-main-color flex flex-col gap-3 bg-zinc-700 rounded-md`}
+      className={cn(
+        `w-72 fixed bottom-0 right-0 z-50 mb-14 mr-2 border border-main-color flex flex-col gap-3 rounded-md`,
+        isDarkMode ? 'bg-black text-white' : 'bg-white text-black',
+      )}
     >
       <div className={`h-72 overflow-y-scroll p-3`} ref={scrollContainerRef}>
         {messages.map((message, index) => (

@@ -1,5 +1,4 @@
-@import './reset.css';
-
+@import '../styles/Reset.css';
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
