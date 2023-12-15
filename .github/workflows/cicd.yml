@@ -24,3 +24,28 @@ jobs:
 
     - name: Build
       run: yarn build
+      
+    - name: Upload dist artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: hongsamIDE-front-ide
+        path: dist/
+
+ # 배포 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download dist artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: hongsamIDE-front-ide
+        path: dist/
+        
+    - name: Deploy to EC2
+      run: |
+        echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
+        chmod 600 private_key.pem
+        scp -r -i private_key.pem -o StrictHostKeyChecking=no dist ${{ secrets.EC2_HOST }}@${{ secrets.EC2_IP }}:/home/${{ secrets.EC2_HOST }}/hongsamIDE-frontend-ide
+        rm -f private_key.pem
