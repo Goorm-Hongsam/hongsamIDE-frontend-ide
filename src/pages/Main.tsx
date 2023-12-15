@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CodeEditor from '../components/article-components/CodeEditor';
 import LeftBar from '../components/article-components/LeftBar';
 import Terminal from '../components/article-components/Terminal';
 import IdeHeader from '../components/article-components/IdeHeader';
+import IdeFooter from '../components/article-components/IdeFooter';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { questionIdState, roomIdState, senderState, uuidState } from '../atoms/recoliAtoms';
-import Chat from '../components/article-components/Chat/Chat';
+import {
+  codeState,
+  questionIdState,
+  roomIdState,
+  senderState,
+  uuidState,
+} from '../atoms/recoliAtoms';
+
 import axios from 'axios';
+import useCodeSubmit from '../hooks/useCodeSubmit';
+import javaDefaultValue from '../utils/Editor/defaultCode';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -16,6 +25,8 @@ const Main = () => {
   const setQuestionId = useSetRecoilState(questionIdState);
   const setRoomId = useSetRecoilState(roomIdState);
   const [sender, setSender] = useRecoilState(senderState);
+  const { fetchCode } = useCodeSubmit();
+  const setCode = useSetRecoilState(codeState);
 
   const fetchUserName = async () => {
     await axios
@@ -37,9 +48,12 @@ const Main = () => {
 
   React.useEffect(() => {
     if (uuidParam && questionIdParam) {
+      const code = javaDefaultValue(questionIdParam);
       setUuid(uuidParam);
       setQuestionId(questionIdParam);
       setRoomId(uuidParam + questionIdParam);
+      setCode(code);
+      fetchCode(uuidParam, questionIdParam);
     }
   }, [uuidParam, questionIdParam]);
 
@@ -83,15 +97,34 @@ const Main = () => {
     setIsResizing(true);
   };
 
+  const ref = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const firstChild = ref.current?.children[0] as HTMLDivElement;
+    const secondChild = ref.current?.children[1] as HTMLDivElement;
+    if (firstChild) {
+      firstChild.style.height = '70%';
+    }
+    if (secondChild) {
+      secondChild.style.height = '30%';
+    }
+  }, []);
   return (
     <div className='flex'>
       <IdeHeader />
       <LeftBar leftWidth={leftWidth} handleMouseDown={handleMouseDown} />
-      <div style={{ height: 'calc(100vh - 49px)', width: `${rightWidth}%`, marginTop: '49px' }}>
+      <div
+        ref={ref}
+        style={{
+          height: 'calc(100vh - 96px)',
+          width: `${rightWidth}%`,
+          marginTop: '49px',
+          marginBottom: '47px',
+        }}
+      >
         <CodeEditor />
         <Terminal />
-        <Chat />
       </div>
+      <IdeFooter />
     </div>
   );
 };
