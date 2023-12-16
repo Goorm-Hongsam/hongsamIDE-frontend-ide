@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axiosConfig = axios.create({
+const defaultAxios = axios.create({
   baseURL: 'https://rz2ypu9b3m.execute-api.ap-northeast-2.amazonaws.com',
   headers: {
     Authorization: 'Bearer your-token',
@@ -8,4 +8,4 @@ const axiosConfig = axios.create({
   withCredentials: true,
 });
 
-export default axiosConfig;
+export default defaultAxios;
