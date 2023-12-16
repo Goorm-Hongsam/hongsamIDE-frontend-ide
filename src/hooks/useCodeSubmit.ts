@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { codeState, languageState, questionIdState, uuidState } from '../atoms/recoliAtoms';
-import axiosConfig from '../api/axiosConfig';
+import defaultAxios from '../api/defaultAxios';
 import javaDefaultValue from '../utils/Editor/defaultCode';
 
 const useCodeSubmit = () => {
@@ -11,7 +11,7 @@ const useCodeSubmit = () => {
 
   const submitCode = async () => {
     try {
-      const result = await axiosConfig.post('ide/run', {
+      const result = await defaultAxios.post('ide/run', {
         uuid: uuid,
         questionId: questionId,
         requestCode: code,
@@ -24,7 +24,7 @@ const useCodeSubmit = () => {
   };
   const saveCode = async () => {
     try {
-      const result = await axiosConfig.post('ide/save', {
+      const result = await defaultAxios.post('ide/save', {
         uuid: uuid,
         questionId: questionId,
         requestCode: code,
@@ -37,7 +37,7 @@ const useCodeSubmit = () => {
   };
   const fetchCode = async (uuidParam: string, questionIdParam: string) => {
     try {
-      const result = await axiosConfig.post('ide/latest', {
+      const result = await defaultAxios.post('ide/latest', {
         uuid: uuidParam,
         questionId: questionIdParam,
       });
