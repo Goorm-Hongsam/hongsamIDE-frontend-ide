@@ -1,6 +1,8 @@
 import { useRecoilValue } from 'recoil';
 import { cn } from '../../utils/cn';
 import { isDarkModeState } from '../../atoms/recoliAtoms';
+import questionAxios from '../../api/questionAxios';
+import { useEffect } from 'react';
 
 interface LeftBarProps {
   leftWidth: number;
@@ -9,6 +11,18 @@ interface LeftBarProps {
 
 const LeftBar: React.FC<LeftBarProps> = ({ leftWidth, handleMouseDown }) => {
   const isDarkMode = useRecoilValue(isDarkModeState);
+  const getQuestion = async () => {
+    try {
+      const result = await questionAxios('');
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getQuestion();
+  }, []);
+
   return (
     <div
       style={{ height: 'calc(100vh - 49px)', width: `${leftWidth}%`, marginTop: '49px' }}
