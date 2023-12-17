@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-// import SockJS from 'sockjs-client';
-// import { IStompSocket } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+import { IStompSocket } from '@stomp/stompjs';
 import { Client } from '@stomp/stompjs';
 import styles from './Chat.module.css';
 import axios from 'axios';
@@ -80,19 +80,48 @@ const Chat: React.FC = () => {
   };
 
   // WebSocket 연결 설정
-  React.useEffect(() => {
-    // const socket = new SockJS('https://chat.hong-sam.online/ws/chat');
-    // const client = new SockJS.Client();
+  // React.useEffect(() => {
+  //   // const socket = new SockJS('https://chat.hong-sam.online/ws/chat');
+  //   // const client = new SockJS.Client();
+  //   const stompClient = new Client();
+  //   stompClient.brokerURL = 'ws://localhost:15674/ws';
+
+  //   console.log(stompClient.brokerURL);
+  //   // const webSocket = {
+  //   //   send: (data: string) => socket.send(data), // 적절한 변환을 수행해야 함
+  //   //   // 기타 필요한 메서드 추가
+  //   // } as IStompSocket;
+  //   // stompClient.webSocketFactory = () => webSocket;
+
+  //   stompClient.onConnect = () => {
+  //     // 입장 메시지 전송
+  //     stompClient.publish({
+  //       destination: '/pub/chat/message',
+  //       body: JSON.stringify({
+  //         type: 'ENTER',
+  //         roomId: `${roomId}`,
+  //         sender: `${sender}`,
+  //         message: null, // 이름에 따라 다른 입장 메시지
+  //         uuid: `${uuid}`,
+  //       }),
+  //     });
+  //     setStompClient(stompClient);
+  //   };
+  //   stompClient.activate();
+  //   // 컴포넌트가 마운트될 때 이전 대화 내용 불러오기 (추가)
+  //   fetchMessages();
+
+  //   return () => {
+  //     if (stompClient) {
+  //       stompClient.deactivate();
+  //     }
+  //   };
+  // }, []); // 빈 배열로 설정하여 한 번만 실행
+
+  useEffect(() => {
+    const socket = new SockJS('https://chat.hong-sam.online/ws/chat');
     const stompClient = new Client();
-    stompClient.brokerURL = 'ws://localhost:15674/ws';
-
-    console.log(stompClient.brokerURL);
-    // const webSocket = {
-    //   send: (data: string) => socket.send(data), // 적절한 변환을 수행해야 함
-    //   // 기타 필요한 메서드 추가
-    // } as IStompSocket;
-    // stompClient.webSocketFactory = () => webSocket;
-
+    stompClient.webSocketFactory = () => socket as IStompSocket;
     stompClient.onConnect = () => {
       // 입장 메시지 전송
       stompClient.publish({
