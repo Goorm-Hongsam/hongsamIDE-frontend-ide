@@ -193,11 +193,11 @@ const Chat: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className={`${styles.text}`}>
+      <div className={`${styles.text} border-t border-main-color`}>
         <textarea
           placeholder='메시지를 입력해주세요.'
           value={message}
-          className={` ${isDarkMode ? 'bg-zinc-800 text-white' : 'bg-white'}`}
+          className={` ${isDarkMode ? 'bg-zinc-800 text-white' : 'bg-slate-200 text-black'}`}
           onChange={(e) => setMessage(e.target.value)}
           /**
            * 한글처럼 한 글자에 여러가지 문자가 담기는 경후 조합하는 동안에 한번 더 출력이 되는 경우가 생긴다고 한다
