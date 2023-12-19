@@ -12,7 +12,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { codeState, isDarkModeState, languageState } from '../../atoms/recoliAtoms';
 import { basicSetup } from 'codemirror';
 import yorkie, { OperationInfo, EditOpInfo } from 'yorkie-js-sdk';
-import { YorkieDoc } from '../../utils/YorkidDoc';
+import { YorkieDoc } from '../../utils/YorkieDoc';
 import { autocompletion } from '@codemirror/autocomplete';
 
 export interface ReactCodeMirrorRef {
