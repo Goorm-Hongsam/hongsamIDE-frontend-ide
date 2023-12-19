@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import CodeMirror, { EditorState, Transaction, ViewUpdate } from '@uiw/react-codemirror';
+import { EditorState, Transaction } from '@uiw/react-codemirror';
 
 // import { javascript } from '@codemirror/lang-javascript';
 // import { python } from '@codemirror/lang-python';
 
 import { EditorView } from '@uiw/react-codemirror';
-import { githubDark, githubLight } from '@uiw/codemirror-theme-github';
+import { githubDark } from '@uiw/codemirror-theme-github';
 import { java } from '@codemirror/lang-java';
 
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { codeState, isDarkModeState, languageState } from '../../atoms/recoliAtoms';
+// import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+// import { codeState, isDarkModeState, languageState } from '../../atoms/recoliAtoms';
 import { basicSetup } from 'codemirror';
 import yorkie, { OperationInfo, EditOpInfo } from 'yorkie-js-sdk';
 import { YorkieDoc } from '../../utils/YorkieDoc';
-import { autocompletion } from '@codemirror/autocomplete';
+// import { autocompletion } from '@codemirror/autocomplete';
 
 export interface ReactCodeMirrorRef {
   editor?: HTMLDivElement | null;
@@ -25,15 +25,15 @@ const CodeEditor = () => {
   // const pyLang = [python()];
   // const jsLang = [javascript({ jsx: true })];
   const javaLang = [java()];
-  const [code, setCode] = useRecoilState(codeState);
-  const isDarkMode = useRecoilValue(isDarkModeState);
-  const setLanguage = useSetRecoilState(languageState);
   const editorRef = React.useRef<HTMLDivElement>(null);
-  const cmViewRef = React.useRef<EditorView | null>(null);
+  // const [code, setCode] = useRecoilState(codeState);
+  // const isDarkMode = useRecoilValue(isDarkModeState);
+  // const setLanguage = useSetRecoilState(languageState);
+  // const cmViewRef = React.useRef<EditorView | null>(null);
 
-  const onChange = React.useCallback((val: string) => {
-    setCode(val);
-  }, []);
+  // const onChange = React.useCallback((val: string) => {
+  //   setCode(val);
+  // }, []);
 
   // React.useEffect(() => {
   //   let cmView: EditorView;
@@ -210,7 +210,7 @@ const CodeEditor = () => {
       // 03-2. create codemirror instance
 
       view = new EditorView({
-        doc: code,
+        doc: '',
         extensions: [basicSetup, javaLang, githubDark, updateListener],
         parent: editorRef.current || undefined,
       });
