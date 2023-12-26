@@ -1,8 +1,12 @@
 import { useRecoilValue } from 'recoil';
 import { cn } from '../../utils/cn';
 import { isDarkModeState } from '../../atoms/recoliAtoms';
-import questionAxios from '../../api/questionAxios';
-import { useEffect } from 'react';
+
+import React from 'react';
+import Markdown from 'react-markdown';
+import axios from 'axios';
+import remarkGfm from 'remark-gfm';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 interface LeftBarProps {
   leftWidth: number;
@@ -11,30 +15,40 @@ interface LeftBarProps {
 
 const LeftBar: React.FC<LeftBarProps> = ({ leftWidth, handleMouseDown }) => {
   const isDarkMode = useRecoilValue(isDarkModeState);
+
   const getQuestion = async () => {
     try {
-      const result = await questionAxios('');
-      console.log(result);
+      const result = await axios.get(
+        'https://hongsam-ide.s3.ap-northeast-2.amazonaws.com/admin/q2/Question.md',
+      );
+      return result.data;
     } catch (error) {
-      console.log(error);
+      return '문제 불러오기 실패했습니다';
     }
   };
-  useEffect(() => {
-    getQuestion();
-  }, []);
+  const question = useSuspenseQuery({
+    queryKey: ['question'],
+    queryFn: () => getQuestion(),
+  });
 
   return (
     <div
       style={{ height: 'calc(100vh - 49px)', width: `${leftWidth}%`, marginTop: '49px' }}
       className={cn(
-        'p-5 border-r overflow-y-scroll border-main-color relative',
+        'border-r overflow-y-scroll border-main-color relative',
         isDarkMode ? 'bg-black text-white' : 'bg-white',
       )}
     >
-      <h1>문제이름</h1>
+      {!question.isLoading ? (
+        <Markdown className={'flex flex-col gap-3 m-3'} remarkPlugins={[remarkGfm]}>
+          {question.data}
+        </Markdown>
+      ) : (
+        <p>...Loading</p>
+      )}
       <div
-        style={{ right: '-2px' }}
-        className='w-2 absolute right-0 h-screen cursor-col-resize'
+        // style={{ right: '-2px' }}
+        className='w-2 absolute right-0 h-screen cursor-col-resize z-10 bg-main-color'
         onMouseDown={handleMouseDown}
       />
     </div>
