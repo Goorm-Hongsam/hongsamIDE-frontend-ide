@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CodeEditor from '../components/article-components/CodeEditor';
 import LeftBar from '../components/article-components/LeftBar';
 import Terminal from '../components/article-components/Terminal';
@@ -17,6 +17,7 @@ import {
 import axios from 'axios';
 import useCodeSubmit from '../hooks/useCodeSubmit';
 import javaDefaultValue from '../utils/Editor/defaultCode';
+import { cn } from '../utils/cn';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -61,13 +62,15 @@ const Main = () => {
   React.useEffect(() => {
     fetchUserName();
   }, []);
+
+  //좌우리사이징
   const [leftWidth, setLeftWidth] = React.useState<number>(30); // 초기 왼쪽 너비 설정
   const [rightWidth, setRightWidth] = React.useState<number>(100 - leftWidth);
-  const [isResizing, setIsResizing] = React.useState(false);
+  const [isWidthResizing, setIsWidthResizing] = React.useState(false);
 
   React.useEffect(() => {
     const handleResize = (e: MouseEvent) => {
-      if (!isResizing) return;
+      if (!isWidthResizing) return;
       const totalWidth = window.innerWidth;
       const newLeftWidth = (e.clientX / totalWidth) * 100;
       setLeftWidth(newLeftWidth);
@@ -76,12 +79,12 @@ const Main = () => {
     };
 
     const handleMouseUp = () => {
-      setIsResizing(false);
+      setIsWidthResizing(false);
       window.removeEventListener('mousemove', handleResize);
       window.removeEventListener('mouseup', handleMouseUp);
     };
 
-    if (isResizing) {
+    if (isWidthResizing) {
       window.addEventListener('mousemove', handleResize);
       window.addEventListener('mouseup', handleMouseUp);
     }
@@ -90,24 +93,56 @@ const Main = () => {
       window.removeEventListener('mousemove', handleResize);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isResizing]);
+  }, [isWidthResizing]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
-    setIsResizing(true);
+    setIsWidthResizing(true);
+  };
+  //높이리사이징
+  const [topHeight, setTopHeight] = React.useState<number>(70);
+  const [bottomHeight, setBottomHeight] = React.useState<number>(100 - topHeight);
+  const [isHRisizing, setIsHRisizing] = React.useState(false);
+  const handleHMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsHRisizing(true);
   };
 
   const ref = React.useRef<HTMLDivElement>(null);
-  useEffect(() => {
+  React.useEffect(() => {
+    const handleResize = (e: MouseEvent) => {
+      if (!isHRisizing) return;
+      const totalHeiht = window.innerHeight;
+      const newTopHeiht = (e.clientY / totalHeiht) * 100;
+      setTopHeight(newTopHeiht);
+      const newBottomHeiht = 100 - newTopHeiht;
+      setBottomHeight(newBottomHeiht);
+    };
+
+    const handleMouseUp = () => {
+      setIsHRisizing(false);
+      window.removeEventListener('mousemove', handleResize);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    if (isHRisizing) {
+      window.addEventListener('mousemove', handleResize);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
     const firstChild = ref.current?.children[0] as HTMLDivElement;
-    const secondChild = ref.current?.children[1] as HTMLDivElement;
+    const secondChild = ref.current?.children[2] as HTMLDivElement;
     if (firstChild) {
-      firstChild.style.height = '70%';
+      firstChild.style.height = `${topHeight}%`;
     }
     if (secondChild) {
-      secondChild.style.height = '30%';
+      secondChild.style.height = `${bottomHeight}%`;
     }
-  }, []);
+    return () => {
+      window.removeEventListener('mousemove', handleResize);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isHRisizing, topHeight]);
+
   return (
     <div className='flex'>
       <IdeHeader />
@@ -122,6 +157,10 @@ const Main = () => {
         }}
       >
         <CodeEditor />
+        <div
+          onMouseDown={handleHMouseDown}
+          className={cn('h-2 cursor-row-resize', isHRisizing && 'bg-main-color')}
+        />
         <Terminal />
       </div>
       <IdeFooter />

@@ -35,22 +35,22 @@ const LeftBar: React.FC<LeftBarProps> = ({ leftWidth, handleMouseDown }) => {
     <div
       style={{ height: 'calc(100vh - 49px)', width: `${leftWidth}%`, marginTop: '49px' }}
       className={cn(
-        'border-r overflow-y-scroll border-main-color relative',
+        'border-r overflow-y-scroll border-main-color relative flex',
         isDarkMode ? 'bg-black text-white' : 'bg-white',
       )}
     >
       {!question.isLoading ? (
-        <Markdown className={'flex flex-col gap-3 m-3'} remarkPlugins={[remarkGfm]}>
+        <Markdown className={'flex flex-col gap-3 m-3 w-full'} remarkPlugins={[remarkGfm]}>
           {question.data}
         </Markdown>
       ) : (
         <p>...Loading</p>
       )}
+
       <div
-        // style={{ right: '-2px' }}
-        className='w-2 absolute right-0 h-screen cursor-col-resize z-10 bg-main-color'
+        className='w-2 absolute right-0 h-screen cursor-col-resize z-50'
         onMouseDown={handleMouseDown}
-      />
+      ></div>
     </div>
   );
 };
