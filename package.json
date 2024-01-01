@@ -19,6 +19,7 @@
     "@stomp/stompjs": "^7.0.0",
     "@tanstack/react-query": "^5.14.1",
     "@tanstack/react-query-devtools": "^5.14.1",
+    "@uiw/codemirror-theme-abcdef": "^4.21.21",
     "@uiw/codemirror-theme-github": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "axios": "^1.6.2",

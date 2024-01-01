@@ -987,6 +987,13 @@
     "@codemirror/state" "^6.0.0"
     "@codemirror/view" "^6.0.0"
 
+"@uiw/codemirror-theme-abcdef@^4.21.21":
+  version "4.21.21"
+  resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-abcdef/-/codemirror-theme-abcdef-4.21.21.tgz#ba049884d1b22e343a52c7bb64b345d21b7fdd6c"
+  integrity sha512-5gHVFyrcOC6ejQeNz7eoSXq46ODYnjFHX8VIzs5Z8oqVqOKIkquI6jL3frP2jN2wdm9EEwa1w4W1zX4nyag9Tg==
+  dependencies:
+    "@uiw/codemirror-themes" "4.21.21"
+
 "@uiw/codemirror-theme-github@^4.21.21":
   version "4.21.21"
   resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-github/-/codemirror-theme-github-4.21.21.tgz#0e0fd13500e6c17032a9b9fccb276e13f6681a91"
