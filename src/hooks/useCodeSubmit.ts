@@ -41,7 +41,7 @@ const useCodeSubmit = () => {
         requestCode: code,
         language: language,
       });
-      console.log(result.data);
+      setResult(result.data);
     } catch (error) {
       console.log(error);
     }
