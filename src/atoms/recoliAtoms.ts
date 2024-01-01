@@ -28,3 +28,7 @@ export const languageState = atom({
   key: 'languageState',
   default: '',
 });
+export const resultState = atom({
+  key: 'resultState',
+  default: '',
+});
