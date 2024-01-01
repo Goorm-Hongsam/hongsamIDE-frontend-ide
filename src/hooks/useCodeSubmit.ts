@@ -1,15 +1,25 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { codeState, languageState, questionIdState, uuidState } from '../atoms/recoliAtoms';
+import {
+  codeState,
+  languageState,
+  questionIdState,
+  resultState,
+  uuidState,
+} from '../atoms/recoliAtoms';
 import defaultAxios from '../api/defaultAxios';
 import javaDefaultValue from '../utils/Editor/defaultCode';
+import React from 'react';
 
 const useCodeSubmit = () => {
   const [code, setCode] = useRecoilState(codeState);
   const uuid = useRecoilValue(uuidState);
   const questionId = useRecoilValue(questionIdState);
   const language = useRecoilValue(languageState);
+  const [result, setResult] = useRecoilState(resultState);
+  const [isResultLoading, setIsResultLoading] = React.useState<boolean>(false);
 
   const submitCode = async () => {
+    setIsResultLoading(true);
     try {
       const result = await defaultAxios.post('ide/run', {
         uuid: uuid,
@@ -17,7 +27,8 @@ const useCodeSubmit = () => {
         requestCode: code,
         language: language,
       });
-      console.log(result);
+      setResult(result.data);
+      setIsResultLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +64,7 @@ const useCodeSubmit = () => {
     }
   };
 
-  return { submitCode, saveCode, fetchCode };
+  return { submitCode, saveCode, fetchCode, result, isResultLoading };
 };
 
 export default useCodeSubmit;

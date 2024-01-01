@@ -5,6 +5,7 @@ const defaultAxios = axios.create({
   headers: {
     Authorization: 'Bearer your-token',
   },
+  timeout: 5000,
   withCredentials: true,
 });
 
