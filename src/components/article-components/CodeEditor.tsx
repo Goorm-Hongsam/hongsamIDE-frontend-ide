@@ -2,7 +2,8 @@ import React from 'react';
 import CodeMirror, { EditorState } from '@uiw/react-codemirror';
 
 import { EditorView } from '@uiw/react-codemirror';
-import { githubDark, githubLight } from '@uiw/codemirror-theme-github';
+import { githubLight } from '@uiw/codemirror-theme-github';
+import { abcdef } from '@uiw/codemirror-theme-abcdef';
 import { java } from '@codemirror/lang-java';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -139,7 +140,7 @@ const CodeEditor: React.FC = () => {
       value={code}
       onChange={onChange}
       extensions={[javaLang]}
-      theme={isDarkMode ? githubDark : githubLight}
+      theme={isDarkMode ? abcdef : githubLight}
     />
 
     // <div ref={editorRef} style={{ height: 'calc(100vh - 30px)' }}></div>
