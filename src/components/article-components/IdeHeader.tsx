@@ -21,7 +21,6 @@ const IdeHeader: React.FC = () => {
       }, 2000);
     }
   }, [urlCopideView]);
-
   return (
     <div
       className={cn(

@@ -180,7 +180,7 @@ const Chat: React.FC = () => {
             ) : message.sender === `${sender}` ? (
               <div className={styles.send}>
                 <div className={styles.sender}>{message.sender}</div>
-                <span className={styles.sendChat}>{message.message}</span>
+                <span className={`${styles.sendChat} bg-main-color`}>{message.message}</span>
                 <div className={styles.time}>{message.time}</div>
               </div>
             ) : (

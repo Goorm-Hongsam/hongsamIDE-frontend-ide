@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, FC } from 'react';
 import { cn } from '../../utils/cn';
 
 export const ButtonVariants = cva(
-  `flex items-center justify-center hover:text-red-400 transition-all text-center relative p-1`,
+  `flex items-center justify-center hover:text-main-color transition-all text-center relative p-1`,
   {
     variants: {
       variant: {
