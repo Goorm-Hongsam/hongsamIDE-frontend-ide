@@ -13,7 +13,7 @@ const Terminal = () => {
     <div
       style={{ height: '203px' }}
       className={cn(
-        'bottom-0 right-0 mb-12 bg-white p-5 border-t border-main-color ',
+        'bottom-0 right-0 mb-12 bg-white p-5',
         isDarkMode ? 'bg-black text-white ' : 'bg-white',
       )}
     >
