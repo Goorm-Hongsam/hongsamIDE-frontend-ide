@@ -1,12 +1,10 @@
-import { useRecoilValue } from 'recoil';
 import { cn } from '../../utils/cn';
-import { isDarkModeState } from '../../atoms/recoliAtoms';
-
 import React from 'react';
 import Markdown from 'react-markdown';
 import axios from 'axios';
 import remarkGfm from 'remark-gfm';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import useDarkMode from '../../hooks/useDarkMode';
 
 interface LeftBarProps {
   leftWidth: number;
@@ -14,8 +12,7 @@ interface LeftBarProps {
 }
 
 const LeftBar: React.FC<LeftBarProps> = ({ leftWidth, handleMouseDown }) => {
-  const isDarkMode = useRecoilValue(isDarkModeState);
-
+  const { darkModeClasses } = useDarkMode();
   const getQuestion = async () => {
     try {
       const result = await axios.get(
@@ -33,11 +30,12 @@ const LeftBar: React.FC<LeftBarProps> = ({ leftWidth, handleMouseDown }) => {
 
   return (
     <div
-      style={{ height: 'calc(100vh - 49px)', width: `${leftWidth}%`, marginTop: '49px' }}
-      className={cn(
-        'border-r overflow-y-scroll border-main-color relative flex',
-        isDarkMode ? 'bg-black text-white' : 'bg-white',
-      )}
+      style={{
+        width: `${leftWidth}%`,
+        marginTop: '49px',
+        marginBottom: '47px',
+      }}
+      className={cn('border-r overflow-y-scroll border-main-color relative flex', darkModeClasses)}
     >
       {!question.isLoading ? (
         <Markdown className={'flex flex-col gap-3 m-3 w-full'} remarkPlugins={[remarkGfm]}>
@@ -48,7 +46,7 @@ const LeftBar: React.FC<LeftBarProps> = ({ leftWidth, handleMouseDown }) => {
       )}
 
       <div
-        className='w-2 absolute right-0 h-screen cursor-col-resize z-50'
+        className='w-2 absolute right-0 h-screen cursor-col-resize'
         onMouseDown={handleMouseDown}
       ></div>
     </div>

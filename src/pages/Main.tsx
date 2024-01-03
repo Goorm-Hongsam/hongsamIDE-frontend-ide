@@ -5,9 +5,10 @@ import Terminal from '../components/article-components/Terminal';
 import IdeHeader from '../components/article-components/IdeHeader';
 import IdeFooter from '../components/article-components/IdeFooter';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   codeState,
+  isDarkModeState,
   questionIdState,
   roomIdState,
   senderState,
@@ -28,6 +29,7 @@ const Main = () => {
   const [sender, setSender] = useRecoilState(senderState);
   const { fetchCode } = useCodeSubmit();
   const setCode = useSetRecoilState(codeState);
+  const isDarkMode = useRecoilValue(isDarkModeState);
 
   const fetchUserName = async () => {
     await axios
@@ -159,7 +161,11 @@ const Main = () => {
         <CodeEditor />
         <div
           onMouseDown={handleHMouseDown}
-          className={cn('h-2 cursor-row-resize', isHRisizing && 'bg-main-color')}
+          className={cn(
+            'h-2 cursor-row-resize border-t border-main-color',
+            isDarkMode ? 'bg-black' : 'bg-white',
+            isHRisizing && 'bg-main-color',
+          )}
         />
         <Terminal />
       </div>
