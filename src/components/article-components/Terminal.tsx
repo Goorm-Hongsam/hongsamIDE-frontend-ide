@@ -1,23 +1,27 @@
-import { useRecoilValue } from 'recoil';
 import { cn } from '../../utils/cn';
-import { isDarkModeState } from '../../atoms/recoliAtoms';
 
 import LodadingIcon from '../atom-components/icon/LoadingIcon';
 import useCodeSubmit from '../../hooks/useCodeSubmit';
+import useDarkMode from '../../hooks/useDarkMode';
+import { useEffect, useState } from 'react';
 
 const Terminal = () => {
-  const { result, isResultLoading } = useCodeSubmit();
-
-  const isDarkMode = useRecoilValue(isDarkModeState);
+  const { result } = useCodeSubmit();
+  const [isLoading, setIsLoading] = useState(false);
+  const { darkModeClasses } = useDarkMode();
+  useEffect(() => {
+    if (result === '') {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [result]);
   return (
     <div
       style={{ height: '203px' }}
-      className={cn(
-        'bottom-0 right-0 mb-12 bg-white p-5',
-        isDarkMode ? 'bg-black text-white ' : 'bg-white',
-      )}
+      className={cn('bottom-0 right-0 mb-12 bg-white p-5', darkModeClasses)}
     >
-      {isResultLoading ? <LodadingIcon /> : <p>{result}</p>}
+      {isLoading ? <LodadingIcon /> : <p>{result}</p>}
     </div>
   );
 };
