@@ -1,30 +1,48 @@
-# React + TypeScript + Vite
+# HongsamIDE V2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+배포 링크 : https://main.hong-sam.online/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 서비스 소개
 
-## Expanding the ESLint configuration
+우리는 개발자가 되기 위하여 코딩테스트를 준비하고,
+다양한 알고리즘 문제 풀이 사이트를 접하게 됩니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+HongsamIDE는 한 화면에서 문제 공유와 채팅 기능을 제공하여 솔루션에 대한 의논과 코드 공유를 더욱 손쉽게 할수 있도록 만들었습니다.
 
-- Configure the top-level `parserOptions` property like this:
+## 팀원
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- 프론트엔드 : 황윤, **강경규**
+- 백엔드 : 이동우, 박서연, 정윤수(v1)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 나의 파트
+
+- 코드 에디터 프로토 타입 제작
+- 코드 에디터 퍼블리싱
+- 코드 에디터 기능구현
+
+## 기술 스택
+
+- typescript : 정적타입으로 안정화를 더하고 예상치 못한 오류를 방지해줄수 있기 때문에 사용했습니다.
+- tailwindcss, cva, clsx, twMerge : 인라인 작성으로 간편하게 사용할수 있는 tailwind와 그런 tailwind의 사용성을 높여주고 컴포넌트의 재사용성을 높여주는 세가지 라이브러리를 함께 사용했습니다.
+- axios : Auto JSON 파싱과 모듈을 사용하여 중복 코드를 제거하였습니다.
+- recoil : darkMode, codeState, resultState 등 다양한 컴포넌트에서 필요로 하는 변수가 점점 증가하여 사용성 좋은 recoil을 전역 변수 관리 라이브러리로 사용했습니다.
+- codemirror : CRDT구현을 위해 yorkie와 호환되는 codemirror를 에디터 라이브러리로 사용했고 CRDT구현에는 성공하지 못했지만 간결한 코드로 강력한 옵션을 제공하는 모습에 계속 사용하게 됐습니다.
+- react-markdown : 문제를 md파일로 작성해서 업로드하는 방식이기 때문에 사용했습니다.
+- msw : API 작업이 완료되기 전에 미리 데이터 송수신 테스트를 위하여 사용했습니다.
+- vite : CRA대비 개선된 빌드환경을 제공하는 vite를 사용했습니다.
+
+## 시연 영상
+
+### 코드에디터 진입
+
+### 코드 제출
+
+### 코드 저장
+
+### 코드 공유
+
+### 코드 공유 후에 저장하고 불러오기
+
+### 다크모드 및 리사이징
