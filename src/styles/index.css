@@ -2,7 +2,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
+@import './Markdown.css';
 @font-face {
   font-family: 'NeoDunggeunmoPro-Regular';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
@@ -10,46 +10,28 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'intelone-mono-font-family-regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2')
+    format('woff2');
 
-* {
+  font-style: normal;
+}
+
+body {
   margin: 0;
   padding: 0;
   font-family: 'NeoDunggeunmoPro-Regular';
 }
-
+.question-font {
+  font-family: 'intelone-mono-font-family-regular';
+}
 body,
 div {
   transition:
     background-color 0.7s ease,
-    color 0.7s ease; /* 배경색 및 글자색 전환 효과 */
+    color 0.7s ease;
 }
 div::-webkit-scrollbar {
-  display: none; /* 스크롤바 숨김 */
-}
-h1 {
-  font-size: 24px;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.spin {
-  animation: spin 1s linear infinite;
-}
-
-pre {
-  background-color: #ddd;
-  padding: 5px;
-  border-radius: 5px;
-  color: black;
-}
-
-img {
-  background-color: white;
+  display: none;
 }
