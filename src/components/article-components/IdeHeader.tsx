@@ -8,12 +8,13 @@ import { cn } from '../../utils/cn';
 import SunIcon from '../atom-components/icon/SunIcon';
 import MoonIcon from '../atom-components/icon/MoonIcon';
 import ToolTip from '../atom-components/ToolTip';
+import useDarkMode from '../../hooks/useDarkMode';
 
 const IdeHeader: React.FC = () => {
   const [urlCopideView, setUrlCopideView] = React.useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useRecoilState<boolean>(isDarkModeState);
   const { submitCode, saveCode } = useCodeSubmit();
-
+  const { darkModeClasses } = useDarkMode();
   React.useEffect(() => {
     if (urlCopideView) {
       setTimeout(() => {
@@ -25,7 +26,7 @@ const IdeHeader: React.FC = () => {
     <div
       className={cn(
         'flex items-center fixed w-screen z-10 border-b border-main-color',
-        isDarkMode ? 'bg-black text-white ' : 'bg-white',
+        darkModeClasses,
       )}
     >
       <div className='flex items-center justify-center gap-3'>
@@ -34,7 +35,6 @@ const IdeHeader: React.FC = () => {
         </a>
         <Button
           children={isDarkMode ? <SunIcon /> : <MoonIcon />}
-          // variant={isDarkMode ? 'main' : 'white'}
           size={'rounded'}
           onClick={() => {
             setIsDarkMode(!isDarkMode);

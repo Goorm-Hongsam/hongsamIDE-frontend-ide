@@ -42,3 +42,14 @@ h1 {
 .spin {
   animation: spin 1s linear infinite;
 }
+
+pre {
+  background-color: #ddd;
+  padding: 5px;
+  border-radius: 5px;
+  color: black;
+}
+
+img {
+  background-color: white;
+}

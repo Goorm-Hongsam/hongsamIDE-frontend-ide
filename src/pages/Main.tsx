@@ -148,7 +148,11 @@ const Main = () => {
   return (
     <div className='flex'>
       <IdeHeader />
-      <LeftBar leftWidth={leftWidth} handleMouseDown={handleMouseDown} />
+      <LeftBar
+        leftWidth={leftWidth}
+        handleMouseDown={handleMouseDown}
+        isWidthResizing={isWidthResizing}
+      />
       <div
         ref={ref}
         style={{
