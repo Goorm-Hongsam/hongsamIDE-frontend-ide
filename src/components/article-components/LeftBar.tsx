@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import useDarkMode from '../../hooks/useDarkMode';
 import { useParams } from 'react-router-dom';
+import LodadingIcon from '../atom-components/icon/LoadingIcon';
 
 interface LeftBarProps {
   leftWidth: number;
@@ -41,22 +42,30 @@ const LeftBar: React.FC<LeftBarProps> = ({ leftWidth, handleMouseDown, isWidthRe
         marginBottom: '47px',
         height: 'calc(100vh - 96px)',
       }}
-      className={cn('border-r overflow-y-scroll border-main-color flex relative', darkModeClasses)}
+      className={cn(
+        'question-font border-r overflow-y-scroll border-main-color flex relative',
+        darkModeClasses,
+      )}
     >
-      {!question.isLoading ? (
-        <Markdown className={'flex flex-col gap-3 p-3 w-full'} remarkPlugins={[remarkGfm]}>
+      {!question.isPending ? (
+        <Markdown className={'flex flex-col gap-3 p-3 w-full h-full'} remarkPlugins={[remarkGfm]}>
           {question.data}
         </Markdown>
       ) : (
-        <p>...Loading</p>
+        <LodadingIcon />
       )}
       <div
+        style={{
+          height: 'calc(100vh - 96px)',
+        }}
         className={cn(
-          'w-2 sticky top-0 right-0 h-screen cursor-col-resize',
+          'w-2 sticky top-0 right-0 cursor-col-resize flex items-center justify-center',
           isWidthResizing && 'bg-main-color',
         )}
         onMouseDown={handleMouseDown}
-      />
+      >
+        <div className='w-3 border-l-2 border-r-1 border-main-color h-10 hover:bg-main-color' />
+      </div>
     </div>
   );
 };

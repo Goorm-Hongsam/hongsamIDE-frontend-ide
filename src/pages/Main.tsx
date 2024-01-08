@@ -166,11 +166,13 @@ const Main = () => {
         <div
           onMouseDown={handleHMouseDown}
           className={cn(
-            'h-2 cursor-row-resize border-t border-main-color',
+            'h-2 cursor-row-resize border-t border-main-color flex items-center justify-center',
             isDarkMode ? 'bg-black' : 'bg-white',
             isHRisizing && 'bg-main-color',
           )}
-        />
+        >
+          <div className='w-10 border-b-2 border-main-color h-2' />
+        </div>
         <Terminal />
       </div>
       <IdeFooter />
