@@ -15,6 +15,7 @@ const IdeHeader: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useRecoilState<boolean>(isDarkModeState);
   const { submitCode, saveCode } = useCodeSubmit();
   const { darkModeClasses } = useDarkMode();
+
   React.useEffect(() => {
     if (urlCopideView) {
       setTimeout(() => {
@@ -46,7 +47,7 @@ const IdeHeader: React.FC = () => {
       <div className='flex items-center gap-5 pr-5'>
         <div className='flex flex-col items-center'>
           <Button label='Share' onClick={() => copyUrlToClipboard(setUrlCopideView)} />
-          {urlCopideView && <ToolTip label='복사 완료' background={'ligth'} />}
+          {urlCopideView && <ToolTip label='복사 완료' additionalClass={darkModeClasses} />}
         </div>
         <Button label='Run' onClick={submitCode} />
         <Button label='Save' onClick={saveCode} />
