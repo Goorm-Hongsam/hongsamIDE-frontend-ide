@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { TResult } from '../types/Code';
 
 export const codeState = atom({
   key: 'codeState',
@@ -28,7 +29,22 @@ export const languageState = atom({
   key: 'languageState',
   default: '',
 });
-export const resultState = atom({
+export const resultState = atom<string>({
   key: 'resultState',
   default: '',
+});
+export const resultObjState = atom<TResult>({
+  key: 'resultObjState',
+  default: {
+    compileError: false,
+    correctResult: [],
+    errorMessage: null,
+    originAnswer: [],
+    printResult: [],
+    timeResult: [],
+  },
+});
+export const isResultLoadingState = atom({
+  key: 'isResultLoadingState',
+  default: true,
 });
