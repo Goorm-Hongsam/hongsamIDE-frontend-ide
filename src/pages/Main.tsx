@@ -15,10 +15,10 @@ import {
   uuidState,
 } from '../atoms/recoliAtoms';
 
-import axios from 'axios';
 import useCodeSubmit from '../hooks/useCodeSubmit';
 import javaDefaultValue from '../utils/Editor/defaultCode';
 import { cn } from '../utils/cn';
+import defaultAxios from '../api/defaultAxios';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -32,8 +32,8 @@ const Main = () => {
   const isDarkMode = useRecoilValue(isDarkModeState);
 
   const fetchUserName = async () => {
-    await axios
-      .get('https://api.hong-sam.online/', { withCredentials: true })
+    await defaultAxios
+      .get('/')
       .then((res) => {
         if (res.data.status === 400 && sender) {
           return;
