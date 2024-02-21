@@ -3,6 +3,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import './Markdown.css';
+@import './Animation.css';
+
 @font-face {
   font-family: 'NeoDunggeunmoPro-Regular';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
@@ -28,9 +30,7 @@ body {
 }
 body,
 div {
-  transition:
-    background-color 0.7s ease,
-    color 0.7s ease;
+  transition: background-color 0.7s ease, color 0.7s ease;
 }
 div::-webkit-scrollbar {
   display: none;
