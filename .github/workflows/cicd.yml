@@ -2,7 +2,7 @@ name: hongsamIDE-front-ide
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   # pull_request:
   #   branches: [ "main" ]
 
@@ -11,43 +11,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js 18.18.2
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.18.2'
-        cache: 'yarn'
+      - name: Use Node.js 20.11.1
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.1'
+          cache: 'yarn'
 
-    - name: Install dependencies
-      run: yarn install
+      - name: Install dependencies
+        run: yarn install
 
-    - name: Build
-      run: yarn build
-      
-    - name: Upload dist artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: hongsamIDE-front-ide
-        path: dist/
+      - name: Build
+        run: yarn build
 
- # 배포 
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: hongsamIDE-front-ide
+          path: dist/
+
+  # 배포
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download dist artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: hongsamIDE-front-ide
-        path: dist/
-        
-    - name: Deploy to EC2
-      run: |
-        echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
-        chmod 600 private_key.pem
-        scp -r -i private_key.pem -o StrictHostKeyChecking=no dist ${{ secrets.EC2_HOST }}@${{ secrets.EC2_IP }}:/home/${{ secrets.EC2_HOST }}/hongsamIDE-frontend-ide
-        script: | # 실행할 스크립트
-            sudo systemctl restart nginx
-        rm -f private_key.pem
+      - name: Download dist artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: hongsamIDE-front-ide
+          path: dist/
+
+      - name: Deploy to EC2
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
+          scp -r -i private_key.pem -o StrictHostKeyChecking=no dist ${{ secrets.EC2_HOST }}@${{ secrets.EC2_IP }}:/home/${{ secrets.EC2_HOST }}/hongsamIDE-frontend-ide
+          script: | # 실행할 스크립트
+              sudo systemctl restart nginx
+          rm -f private_key.pem
