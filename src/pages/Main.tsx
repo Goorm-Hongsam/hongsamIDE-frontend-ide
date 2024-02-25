@@ -4,11 +4,13 @@ import LeftBar from '../components/article-components/LeftBar';
 import Terminal from '../components/article-components/Terminal';
 import IdeHeader from '../components/article-components/IdeHeader';
 import IdeFooter from '../components/article-components/IdeFooter';
+import Modal from '../components/atom-components/Modal';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   codeState,
   isDarkModeState,
+  isResultModalViewState,
   questionIdState,
   roomIdState,
   senderState,
@@ -30,6 +32,7 @@ const Main = () => {
   const { fetchCode } = useCodeSubmit();
   const setCode = useSetRecoilState(codeState);
   const isDarkMode = useRecoilValue(isDarkModeState);
+  const isResultModalView = useRecoilValue(isResultModalViewState);
 
   const fetchUserName = async () => {
     await defaultAxios
@@ -147,6 +150,8 @@ const Main = () => {
 
   return (
     <div className='flex'>
+      {isResultModalView && <Modal />}
+
       <IdeHeader />
       <LeftBar
         leftWidth={leftWidth}

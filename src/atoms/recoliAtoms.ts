@@ -48,3 +48,11 @@ export const isResultLoadingState = atom({
   key: 'isResultLoadingState',
   default: true,
 });
+export const isResultModalViewState = atom({
+  key: 'isResultModalViewState',
+  default: false,
+});
+export const isResultCorrectState = atom({
+  key: 'isResultCorrectState',
+  default: false,
+});
