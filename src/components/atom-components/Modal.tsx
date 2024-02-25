@@ -64,13 +64,13 @@ const Modal = () => {
       <div
         onClick={deleteModal}
         ref={backgroundRef}
-        className='w-full h-full absolute opacity-100 transition-2s'
+        className='w-full h-full absolute opacity-100 transition-1s'
       />
       <div
         ref={modalRef}
         className={cn(
           darkModeClasses,
-          `absolute border-main-color p-8 rounded-md flex items-center justify-center flex-col gap-5 shadow-lg transition-2s -translate-y-60 bg-white`,
+          `absolute border-main-color p-8 rounded-md flex items-center justify-center flex-col gap-5 shadow-lg transition-1s -translate-y-60 bg-white`,
         )}
       >
         {isResultCorrect ? (
