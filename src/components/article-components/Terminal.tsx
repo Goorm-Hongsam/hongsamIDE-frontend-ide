@@ -4,8 +4,12 @@ import LoadingIcon from '../atom-components/icon/LoadingIcon';
 import useCodeSubmit from '../../hooks/useCodeSubmit';
 import useDarkMode from '../../hooks/useDarkMode';
 
-import { useRecoilValue } from 'recoil';
-import { isResultLoadingState } from '../../atoms/recoliAtoms';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  isResultCorrectState,
+  isResultLoadingState,
+  isResultModalViewState,
+} from '../../atoms/recoliAtoms';
 import React from 'react';
 
 const Terminal = () => {
@@ -16,10 +20,10 @@ const Terminal = () => {
 
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
   const [isCompiling, setIsCompiling] = React.useState(true);
-  // const [time, setTime] = React.useState<number>(0);
   const [correctCount, setCorrectCount] = React.useState<number>(0);
   const [incorrectCount, setIncorrectCount] = React.useState<number>(0);
-  const [isResultCorrect, setIsResultCorrect] = React.useState<boolean>(true);
+  const setIsResultModalView = useSetRecoilState(isResultModalViewState);
+  const setIsResultCorrect = useSetRecoilState(isResultCorrectState);
 
   React.useEffect(() => {
     setCorrectCount(0);
@@ -33,7 +37,6 @@ const Terminal = () => {
           setIncorrectCount((prevIndex) => prevIndex + 1);
         }
       });
-      // if (!incorrectCount) setIsCorrect(true);
     }
 
     if (!resultObj.compileError) {
@@ -54,7 +57,6 @@ const Terminal = () => {
       };
     }
   }, [resultObj]);
-  console.log(resultObj);
   React.useEffect(() => {
     if (!resultObj.compileError) {
       // const time = resultObj.timeResult[currentIndex] / 10;
@@ -75,6 +77,9 @@ const Terminal = () => {
 
       if (incorrectCount !== 0) setIsResultCorrect(false);
       if (incorrectCount === 0) setIsResultCorrect(true);
+
+      if (currentIndex === 9) setIsResultModalView(true);
+      if (currentIndex === 9) setIsResultModalView(true);
     }
   }, [currentIndex]);
 
@@ -178,11 +183,13 @@ const Terminal = () => {
             </div>
           );
         })}
-        <div className={`w-full ${!isCompiling && 'hidden'}`}>
-          <div className={`h-1.5 w-full bg-green-100 overflow-hidden`}>
-            <div className='progress w-full h-full bg-green-500 left-right'></div>
+        {isCompiling && (
+          <div className={`w-full`}>
+            <div className={`h-1.5 w-full bg-green-100 overflow-hidden`}>
+              <div className='progress w-full h-full bg-green-500 left-right'></div>
+            </div>
           </div>
-        </div>
+        )}
         {currentIndex === maxIndex && (
           <div className='py-5 flex flex-col gap-2 bg-gray-200 p-3 text-black rounded-md'>
             <p className='text-lg'>{maxLength === 2 ? '테스트' : '채점'} 결과</p>
@@ -192,7 +199,6 @@ const Terminal = () => {
             <p className='text-red-400'>
               {maxLength}개 중 {incorrectCount}개 틀렸습니다 !
             </p>
-            {isResultCorrect ? '맞음' : '틀림'}
           </div>
         )}
       </div>
