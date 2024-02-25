@@ -3,12 +3,13 @@ import { ButtonHTMLAttributes, FC } from 'react';
 import { cn } from '../../utils/cn';
 
 export const ButtonVariants = cva(
-  `flex items-center justify-center hover:text-main-color transition-all text-center relative p-1`,
+  `flex items-center justify-center hover:shadow-md hover:bg-main-color hover:text-white transition-all text-center relative py-1 px-2 rounded-md shadow-md`,
   {
     variants: {
       variant: {
-        main: 'bg-main-color shadow-md',
-        white: 'bg-white',
+        defalut: 'hover:shadow-md hover:bg-main-color text-white',
+        main: 'bg-main-color hover:bg-main-dark-color text-white hover:text-white',
+        alert: 'bg-red-400 hover:bg-red-700 text-white hover:text-white',
       },
       size: {
         rounded: 'w-7 h-7 rounded-full',
