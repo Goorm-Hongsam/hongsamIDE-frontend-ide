@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const defaultAxios = axios.create({
-  baseURL: 'https://rz2ypu9b3m.execute-api.ap-northeast-2.amazonaws.com',
+  baseURL: 'https://gateway.hong-sam.online/',
   headers: {
     Authorization: 'Bearer your-token',
   },

@@ -24,7 +24,7 @@ const useCodeSubmit = () => {
     setResult('');
     setIsResultLoading(true);
     try {
-      const result = await defaultAxios.post('grader/run/lee', {
+      const result = await defaultAxios.post('grader/run', {
         uuid: uuid,
         questionId: questionId,
         requestCode: code,
@@ -43,7 +43,7 @@ const useCodeSubmit = () => {
     setResult('');
     setIsResultLoading(true);
     try {
-      const result = await defaultAxios.post('grader/run/lee', {
+      const result = await defaultAxios.post('grader/run', {
         questionId: questionId,
         uuid: uuid,
         requestCode: code,
@@ -69,7 +69,7 @@ const useCodeSubmit = () => {
       timeResult: [],
     });
     try {
-      const result = await defaultAxios.post('grader/save/lee', {
+      const result = await defaultAxios.post('grader/save', {
         uuid: uuid,
         questionId: questionId,
         requestCode: code,
@@ -84,7 +84,7 @@ const useCodeSubmit = () => {
   const fetchCode = async (uuidParam: string, questionIdParam: string) => {
     setResult(`주석을 보고 코드 작성 방법을 이해한 후에 문제를 풀어보세요 !`);
     try {
-      const result = await defaultAxios.post('grader/get/lee', {
+      const result = await defaultAxios.post('grader/get', {
         uuid: uuidParam,
         questionId: questionIdParam,
         language: language,
