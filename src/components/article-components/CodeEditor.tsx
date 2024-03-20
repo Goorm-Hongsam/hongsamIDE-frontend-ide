@@ -13,21 +13,9 @@ export interface ReactCodeMirrorRef {
   state?: EditorState;
   view?: EditorView;
 }
-// const langExtens = () => {
-//   const javaLang = [java()];
-//   const langMap = new Map();
-//   langMap.set('java', javaLang);
-//   return langMap;
-// };
 
 const CodeEditor: React.FC = () => {
   const javaLang = [java()];
-  // const [lang, setLang] = React.useState('');
-  // React.useEffect(() => {
-  //   const lang = langExtens();
-
-  //   console.log(lang.get('java'));
-  // }, []);
 
   const setLanguage = useSetRecoilState(languageState);
 
