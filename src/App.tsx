@@ -11,11 +11,16 @@ function App() {
   console.log(cookies);
   console.log(getCookie('Authorization'));
   React.useEffect(() => {
+    const token2 = getCookie('Authorization');
+    console.log(token2);
+    if (token2) {
+      localStorage.setItem('Authorization', token2);
+    }
     const token = cookies.Authorization;
     console.log(token);
     if (token) {
       // 토큰이 존재하면 로컬 스토리지에 저장
-      localStorage.setItem('token', token);
+      localStorage.setItem('Authorization', token);
     }
   }, []);
 
