@@ -27,7 +27,7 @@ export const roomIdState = atom({
 });
 export const languageState = atom({
   key: 'languageState',
-  default: '',
+  default: 'java',
 });
 export const resultState = atom<string>({
   key: 'resultState',
