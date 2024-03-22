@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const defaultAxios = axios.create({
   baseURL: 'https://gateway.hong-sam.online',
+  withCredentials: true,
 });
 
 defaultAxios.interceptors.request.use(
