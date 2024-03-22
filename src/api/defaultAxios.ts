@@ -10,7 +10,7 @@ defaultAxios.interceptors.request.use(
     const token = localStorage.getItem('Authorization');
     console.log('axios token : ', token);
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `${token}`;
     }
     return config;
   },
