@@ -9,12 +9,10 @@ import { CookiesProvider } from 'react-cookie';
 import { getCookie } from './utils/cookie.ts';
 const queryClinent = new QueryClient();
 
-const token2 = getCookie('Authorization');
-console.log('main.tsx token2 : ', token2);
-if (token2) {
-  localStorage.setItem('Authorization', token2);
+const token = getCookie('Authorization');
+if (token) {
+  localStorage.setItem('Authorization', token);
 }
-console.log('main.tsx Authorization LocalStorage : ', localStorage.getItem('Authorization'));
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClinent}>

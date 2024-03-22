@@ -8,7 +8,6 @@ const defaultAxios = axios.create({
 defaultAxios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('Authorization');
-    console.log('axios token : ', token);
     if (token) {
       config.headers.Authorization = `${token}`;
     }
