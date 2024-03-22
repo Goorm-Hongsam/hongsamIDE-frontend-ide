@@ -8,20 +8,21 @@ import { getCookie } from './utils/cookie';
 
 function App() {
   const [cookies] = useCookies();
-  console.log(cookies);
-  console.log(getCookie('Authorization'));
+  console.log('useCookies : ', cookies);
+  console.log('getGookie : ', getCookie('Authorization'));
   React.useEffect(() => {
     const token2 = getCookie('Authorization');
-    console.log(token2);
+    console.log('token2 : ', token2);
     if (token2) {
       localStorage.setItem('Authorization', token2);
     }
     const token = cookies.Authorization;
-    console.log(token);
+    console.log('token : ', token);
     if (token) {
       // 토큰이 존재하면 로컬 스토리지에 저장
       localStorage.setItem('Authorization', token);
     }
+    console.log('Authorization LocalStorage : ', localStorage.getItem('Authorization'));
   }, []);
 
   return (
