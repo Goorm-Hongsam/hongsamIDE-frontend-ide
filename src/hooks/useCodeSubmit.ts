@@ -83,7 +83,6 @@ const useCodeSubmit = () => {
     }
   };
   const fetchCode = async (uuidParam: string, questionIdParam: string) => {
-    setResult(`주석을 보고 코드 작성 방법을 이해한 후에 문제를 풀어보세요 !`);
     try {
       const result = await defaultAxios.post(`grader/get/${uuidParam}`, {
         uuid: uuidParam,
@@ -93,6 +92,7 @@ const useCodeSubmit = () => {
       if (result.status === 200) {
         const requestCode = result.data.requestCode;
         setCode(requestCode);
+        setResult('이전에 작성한 코드를 불러왔어요 !');
         setIsResultLoading(false);
       }
     } catch (error) {
