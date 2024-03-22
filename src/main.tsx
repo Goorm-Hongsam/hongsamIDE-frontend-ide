@@ -10,6 +10,7 @@ import { getCookie } from './utils/cookie.ts';
 const queryClinent = new QueryClient();
 
 const token = getCookie('Authorization');
+console.debug(token);
 if (token) {
   localStorage.setItem('Authorization', token);
 }
