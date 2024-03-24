@@ -58,6 +58,10 @@ const Modal = () => {
   const deleteModal = () => {
     setIsResultModalView(false);
   };
+  const goToMainPage = () => {
+    // 서브도메인으로 이동
+    window.location.href = 'https://main.hong-sam.online/question';
+  };
 
   return (
     <div className='w-screen h-screen flex justify-center absolute z-50 transition-all'>
@@ -81,7 +85,7 @@ const Modal = () => {
 
         <div className='flex gap-3'>
           <Button label='닫기' variant={'alert'} onClick={deleteModal} />
-          <Button label='다른 문제 풀러가기' variant={'main'} />
+          <Button label='다른 문제 풀러가기' variant={'main'} onClick={goToMainPage} />
         </div>
       </div>
     </div>
