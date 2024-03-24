@@ -9,7 +9,7 @@ function App() {
     <React.Fragment>
       <Routes>
         <Route path='/:uuidParam/:questionIdParam' element={<Main />} />
-        <Route path='/:uuidParam/:questionIdParam/error' element={<Error message='error!!' />} />
+        <Route path='/error/:status' element={<Error />} />
       </Routes>
     </React.Fragment>
   );

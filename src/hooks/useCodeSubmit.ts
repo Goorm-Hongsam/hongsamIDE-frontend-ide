@@ -14,14 +14,14 @@ import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const useCodeSubmit = () => {
+  const navigator = useNavigate();
   const [code, setCode] = useRecoilState(codeState);
+  const [result, setResult] = useRecoilState(resultState);
+  const [resultObj, setResultObj] = useRecoilState(resultObjState);
   const uuid = useRecoilValue(uuidState);
   const questionId = useRecoilValue(questionIdState);
   const language = useRecoilValue(languageState);
-  const [result, setResult] = useRecoilState(resultState);
-  const [resultObj, setResultObj] = useRecoilState(resultObjState);
   const setIsResultLoading = useSetRecoilState(isResultLoadingState);
-  const navigator = useNavigate();
 
   const submitCode = async () => {
     setResult('');
@@ -125,11 +125,12 @@ const useCodeSubmit = () => {
             // 기타 HTTP 오류 처리
             // 에러 페이지 전환
             setResult('예상치 못한 문제가 발생했습니다.');
-            navigator('/error');
+            navigator('/error/500');
           }
         } else {
           // 네트워크 오류 등에 대한 처리
           setResult('네트워크 오류가 발생했습니다.');
+          navigator('/error/500');
         }
       } else {
         // AxiosError 타입이 아닌 다른 오류에 대한 처리
