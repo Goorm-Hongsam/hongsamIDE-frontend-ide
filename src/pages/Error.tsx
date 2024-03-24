@@ -11,6 +11,10 @@ function Error() {
     // 서브도메인으로 이동
     window.location.href = 'https://main.hong-sam.online/question';
   };
+  const goToLoginPage = () => {
+    // 서브도메인으로 이동
+    window.location.href = 'https://main.hong-sam.online/login';
+  };
   console.log(status);
 
   if (status)
@@ -26,13 +30,21 @@ function Error() {
               <p className='text-lg mb-6'>다시 로그인하고 시도해주세요.</p>
             </React.Fragment>
           )}
-
-          <button
-            onClick={goToMainPage}
-            className='px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-300'
-          >
-            Go to Main Page
-          </button>
+          {+status === 401 ? (
+            <button
+              onClick={goToLoginPage}
+              className='px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-300'
+            >
+              로그인 페이지로 이동
+            </button>
+          ) : (
+            <button
+              onClick={goToMainPage}
+              className='px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-300'
+            >
+              메인 페이지로 이동
+            </button>
+          )}
         </div>
       </div>
     );
