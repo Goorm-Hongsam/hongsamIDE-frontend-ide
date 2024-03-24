@@ -113,14 +113,14 @@ const useCodeSubmit = () => {
             // 403 에러 처리
             // 에러 페이지 전환
             setResult('본인의 문제에만 접근할 수 있습니다.');
-            navigator('/error');
+            navigator('/error/403');
           } else if (status === 401) {
             // 401 에러 처리
             // 에러 페이지 전환
             setResult(
               '죄송합니다. 현재 세션이 만료되었거나 인증에 실패했습니다. 다시 로그인하고 시도해주세요.',
             );
-            navigator('/error');
+            navigator('/error/401');
           } else {
             // 기타 HTTP 오류 처리
             // 에러 페이지 전환
